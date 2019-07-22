@@ -9,17 +9,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace AdoAutoStateTransitionsEngine
 {
     public class AdoEngine
     {
-        public AdoEngine(string adoOrganization, string pat)
+        public AdoEngine(string adoOrganization, string pat, ILogger logger)
         {
             var c = new VssBasicCredential(string.Empty, pat);
             var connection = new VssConnection(new Uri(adoOrganization), c);
 
             witClient = connection.GetClient<WorkItemTrackingHttpClient>();
+            this.logger = logger;
         }
 
         public async Task UpdateActiveState(AdoWebHookMessage message)
@@ -30,9 +32,16 @@ namespace AdoAutoStateTransitionsEngine
             var id = message.WorkItemId();
             while (id > 0)
             {
+                const string reason = "active state rule";
+                logger.LogInformation("Executing {0} for work item {1}", reason, id);
+
                 var parent = await GetParentWorkItem(id);
+
+                logger.LogTrace("Parent work item {0} in state {1}", parent?.Id, parent.GetState());
                 if (parent != null && parent.IsStateNew())
-                    await UpdateWorkItemState(parent.Id.GetValueOrDefault(), WorkItemState.Active.ToString(), "active state rule");
+                {
+                    await UpdateWorkItemState(parent.Id.GetValueOrDefault(), WorkItemState.Active.ToString(), reason);
+                }
 
                 id = parent == null ? 0 : parent.Id.GetValueOrDefault();
             }
@@ -43,18 +52,24 @@ namespace AdoAutoStateTransitionsEngine
             if (!message.IsChangeToClosed())
                 return;
 
+            const string reason = "closed state rule";
+            logger.LogInformation("Executing {0} for work item {1}", reason, message.WorkItemId());
+
             var parent = await GetParentWorkItem(message.WorkItemId());
             var allChildren = GetChildrenWorkItems(parent).Select(ac => ac.Result);
+
+            logger.LogTrace("Parent work item {0} has {1} children", parent?.Id, allChildren.Count());
 
             if (allChildren
                 .All(c => c.GetState() == WorkItemState.Closed.ToString() || c.GetState() == WorkItemState.Removed.ToString()))
             {
+                logger.LogTrace("Parent work item {0} has all children in Closed or Removed", parent?.Id);
                 var targetState = 
                     allChildren.Any(c => c.GetState() == WorkItemState.Closed.ToString()) ?
                         WorkItemState.Closed.ToString() :
                         WorkItemState.Removed.ToString();
 
-                await UpdateWorkItemState(parent.Id.GetValueOrDefault(), targetState, "closed state rule");
+                await UpdateWorkItemState(parent.Id.GetValueOrDefault(), targetState, reason);
             }
         }
 
@@ -105,6 +120,8 @@ namespace AdoAutoStateTransitionsEngine
 
         public async Task<WorkItem> UpdateWorkItemState(int id, string newState, string reason = "[test]")
         {
+            logger.LogInformation("Updating state for work item {0} to {1} due to {2}", id, newState, reason);
+
             var patchDocument = new JsonPatchDocument();
             patchDocument.Add(new JsonPatchOperation()
             {
@@ -125,5 +142,6 @@ namespace AdoAutoStateTransitionsEngine
         }
 
         WorkItemTrackingHttpClient witClient;
+        ILogger logger;
     }
 }

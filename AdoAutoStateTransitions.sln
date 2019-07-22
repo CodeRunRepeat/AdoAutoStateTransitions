@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdoAutoStateTransitionsEngi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoAutoStateTransitionsEngineTests", "AdoAutoStateTransitionsEngineTest\AdoAutoStateTransitionsEngineTests.csproj", "{2FC501C6-77BB-41A2-85A5-4CFA65DBC687}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoAutoStateTransitionsFunctions", "AdoAutoStateTransitionsFunctions\AdoAutoStateTransitionsFunctions.csproj", "{B9501062-69C3-442F-B49A-A22F5B199E8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2FC501C6-77BB-41A2-85A5-4CFA65DBC687}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FC501C6-77BB-41A2-85A5-4CFA65DBC687}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FC501C6-77BB-41A2-85A5-4CFA65DBC687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9501062-69C3-442F-B49A-A22F5B199E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9501062-69C3-442F-B49A-A22F5B199E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9501062-69C3-442F-B49A-A22F5B199E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9501062-69C3-442F-B49A-A22F5B199E8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

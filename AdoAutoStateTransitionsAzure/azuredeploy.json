@@ -105,6 +105,20 @@
               "Send"
             ]
           }
+        },
+        {
+          "type": "AuthorizationRules",
+          "apiVersion": "2017-04-01",
+          "name": "ListenAccessKey",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusTopicName'))]"
+          ],
+          "properties": {
+            "rights": [
+              "Listen"
+            ]
+          }
         }
       ]
     }

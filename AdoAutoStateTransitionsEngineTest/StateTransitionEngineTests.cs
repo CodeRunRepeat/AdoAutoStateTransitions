@@ -1,5 +1,7 @@
 ﻿using AdoAutoStateTransitionsEngine;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
@@ -21,7 +23,10 @@ namespace AdoAutoStateTransitionsEngineTests
             var azureDevOpsOrganizationUrl = config["azureDevOpsOrganizationUrl"];
             var pat = config["pat"];
 
-            engine = new AdoEngine(azureDevOpsOrganizationUrl, pat);
+            using (var factory = new LoggerFactory(new ILoggerProvider[] { new DebugLoggerProvider() }))
+            {
+                engine = new AdoEngine(azureDevOpsOrganizationUrl, pat, factory.CreateLogger(""));
+            }
         }
 
         [TestMethod]

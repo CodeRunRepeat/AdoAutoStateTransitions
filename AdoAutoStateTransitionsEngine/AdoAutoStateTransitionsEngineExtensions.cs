@@ -16,7 +16,7 @@ namespace AdoAutoStateTransitionsEngine
     {
         public static string GetState(this WorkItem workItem)
         {
-            return (workItem.Fields["System.State"] as string);
+            return (workItem?.Fields["System.State"] as string);
         }
 
         public static bool IsStateNew(this WorkItem workItem)
