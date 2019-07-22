@@ -1,0 +1,151 @@
+{
+  "id": "dbed24a4-1102-4b72-8456-f6388e855545",
+  "eventType": "workitem.updated",
+  "publisherId": "tfs",
+  "message": {
+    "text": "Task #336 (Test task) transitioned to Active by Natasa Manousopoulou\r\n(https://dev.azure.com/csee2e/web/wi.aspx?pcguid=a4f04b73-2ff5-4b1b-a644-b6583bbe9446&id=336)",
+    "html": "<a href=\"https://dev.azure.com/csee2e/web/wi.aspx?pcguid=a4f04b73-2ff5-4b1b-a644-b6583bbe9446&amp;id=336\">Task #336</a> (Test task) transitioned to Active by Natasa Manousopoulou",
+    "markdown": "[Task #336](https://dev.azure.com/csee2e/web/wi.aspx?pcguid=a4f04b73-2ff5-4b1b-a644-b6583bbe9446&id=336) (Test task) transitioned to Active by Natasa Manousopoulou"
+  },
+  "detailedMessage": {
+    "text": "Task #336 (Test task) transitioned to Active by Natasa Manousopoulou\r\n(https://dev.azure.com/csee2e/web/wi.aspx?pcguid=a4f04b73-2ff5-4b1b-a644-b6583bbe9446&id=336)\r\n\r\n- New State: Active\r\n",
+    "html": "<a href=\"https://dev.azure.com/csee2e/web/wi.aspx?pcguid=a4f04b73-2ff5-4b1b-a644-b6583bbe9446&amp;id=336\">Task #336</a> (Test task) transitioned to Active by Natasa Manousopoulou<ul>\r\n<li>New State: Active</li></ul>",
+    "markdown": "[Task #336](https://dev.azure.com/csee2e/web/wi.aspx?pcguid=a4f04b73-2ff5-4b1b-a644-b6583bbe9446&id=336) (Test task) transitioned to Active by Natasa Manousopoulou\r\n\r\n* New State: Active\r\n"
+  },
+  "resource": {
+    "id": 2,
+    "workItemId": 336,
+    "rev": 2,
+    "revisedBy": {
+      "id": "8ef3b7a2-c754-6a86-a58f-5dd8a889b16b",
+      "name": "Natasa Manousopoulou <anastm@microsoft.com>",
+      "displayName": "Natasa Manousopoulou",
+      "url": "https://spsprodwus21.vssps.visualstudio.com/Ab5122565-5179-428b-b04a-14a10488ea48/_apis/Identities/8ef3b7a2-c754-6a86-a58f-5dd8a889b16b",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/csee2e/_apis/GraphProfile/MemberAvatars/aad.OGVmM2I3YTItYzc1NC03YTg2LWE1OGYtNWRkOGE4ODliMTZi"
+        }
+      },
+      "uniqueName": "anastm@microsoft.com",
+      "imageUrl": "https://dev.azure.com/csee2e/_apis/GraphProfile/MemberAvatars/aad.OGVmM2I3YTItYzc1NC03YTg2LWE1OGYtNWRkOGE4ODliMTZi",
+      "descriptor": "aad.OGVmM2I3YTItYzc1NC03YTg2LWE1OGYtNWRkOGE4ODliMTZi"
+    },
+    "revisedDate": "9999-01-01T00:00:00Z",
+    "fields": {
+      "System.Rev": {
+        "oldValue": 1,
+        "newValue": 2
+      },
+      "System.AuthorizedDate": {
+        "oldValue": "2019-07-19T13:55:33.81Z",
+        "newValue": "2019-07-19T14:00:02.22Z"
+      },
+      "System.RevisedDate": {
+        "oldValue": "2019-07-19T14:00:02.22Z",
+        "newValue": "9999-01-01T00:00:00Z"
+      },
+      "System.State": {
+        "oldValue": "New",
+        "newValue": "Active"
+      },
+      "System.Reason": {
+        "oldValue": "New",
+        "newValue": "Work started"
+      },
+      "System.ChangedDate": {
+        "oldValue": "2019-07-19T13:55:33.81Z",
+        "newValue": "2019-07-19T14:00:02.22Z"
+      },
+      "System.Watermark": {
+        "oldValue": 1221,
+        "newValue": 1222
+      },
+      "Microsoft.VSTS.Common.StateChangeDate": {
+        "oldValue": "2019-07-19T13:55:33.81Z",
+        "newValue": "2019-07-19T14:00:02.22Z"
+      },
+      "Microsoft.VSTS.Common.ActivatedDate": {
+        "newValue": "2019-07-19T14:00:02.22Z"
+      },
+      "Microsoft.VSTS.Common.ActivatedBy": {
+        "newValue": "Natasa Manousopoulou <anastm@microsoft.com>"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336/updates/2"
+      },
+      "workItemUpdates": {
+        "href": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336/updates"
+      },
+      "parent": {
+        "href": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336"
+      },
+      "html": {
+        "href": "https://dev.azure.com/csee2e/web/wi.aspx?pcguid=a4f04b73-2ff5-4b1b-a644-b6583bbe9446&id=336"
+      }
+    },
+    "url": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336/updates/2",
+    "revision": {
+      "id": 336,
+      "rev": 2,
+      "fields": {
+        "System.AreaPath": "Azure Search SDK\\Java SDK\\Java Data Plane",
+        "System.TeamProject": "Azure Search SDK",
+        "System.IterationPath": "Azure Search SDK\\Java SDK\\Prep sprint 3",
+        "System.WorkItemType": "Task",
+        "System.State": "Active",
+        "System.Reason": "Work started",
+        "System.AssignedTo": "Natasa Manousopoulou <anastm@microsoft.com>",
+        "System.CreatedDate": "2019-07-19T13:55:33.81Z",
+        "System.CreatedBy": "Natasa Manousopoulou <anastm@microsoft.com>",
+        "System.ChangedDate": "2019-07-19T14:00:02.22Z",
+        "System.ChangedBy": "Natasa Manousopoulou <anastm@microsoft.com>",
+        "System.CommentCount": 0,
+        "System.Title": "Test task",
+        "Microsoft.VSTS.Common.StateChangeDate": "2019-07-19T14:00:02.22Z",
+        "Microsoft.VSTS.Common.ActivatedDate": "2019-07-19T14:00:02.22Z",
+        "Microsoft.VSTS.Common.ActivatedBy": "Natasa Manousopoulou <anastm@microsoft.com>",
+        "Microsoft.VSTS.Common.Priority": 2
+      },
+      "relations": [
+        {
+          "rel": "System.LinkTypes.Hierarchy-Reverse",
+          "url": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/306",
+          "attributes": {
+            "isLocked": false,
+            "name": "Parent"
+          }
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336/revisions/2"
+        },
+        "workItemRevisions": {
+          "href": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336/revisions"
+        },
+        "parent": {
+          "href": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336"
+        }
+      },
+      "url": "https://dev.azure.com/csee2e/ce76c4ef-2eb1-42fb-b73e-55a3aab3f280/_apis/wit/workItems/336/revisions/2"
+    }
+  },
+  "resourceVersion": "1.0",
+  "resourceContainers": {
+    "collection": {
+      "id": "a4f04b73-2ff5-4b1b-a644-b6583bbe9446",
+      "baseUrl": "https://dev.azure.com/csee2e/"
+    },
+    "account": {
+      "id": "b5122565-5179-428b-b04a-14a10488ea48",
+      "baseUrl": "https://dev.azure.com/csee2e/"
+    },
+    "project": {
+      "id": "ce76c4ef-2eb1-42fb-b73e-55a3aab3f280",
+      "baseUrl": "https://dev.azure.com/csee2e/"
+    }
+  },
+  "createdDate": "2019-07-19T14:00:09.2817389Z"
+}
