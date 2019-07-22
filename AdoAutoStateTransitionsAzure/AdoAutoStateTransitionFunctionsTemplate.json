@@ -1,0 +1,124 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appService_AdoAutoStateTransitionsFunctions_name": {
+      "type": "string"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_location": {
+      "type": "string"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_name": {
+      "type": "string"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_resourceGroup": {
+      "type": "string"
+    },
+    "adoautostatetransitionsfStorageAccount": {
+      "type": "String"
+    },
+    "storageaccount_adoautostatetransitionsf": {
+      "type": "string"
+    },
+    "adoautostatetransitionsfStorageAccount_location": {
+      "type": "String"
+    },
+    "adoautostatetransitionsfStorageAccountType": {
+      "type": "String"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_skuName": {
+      "type": "string"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_skuTier": {
+      "type": "string"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_skuFamily": {
+      "type": "string"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_skuSize": {
+      "type": "string"
+    },
+    "appServicePlan_AdoAutoStateTransitionsFunctions_workerSizeId": {
+      "type": "int"
+    },
+    "appService_AdoPat": {
+      "type": "string"
+    },
+    "appService_AdoUrl": {
+      "type": "string"
+    },
+    "appService_ServiceBusConnectionString": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "location": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_location')]",
+      "name": "[parameters('appService_AdoAutoStateTransitionsFunctions_name')]",
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2015-08-01",
+      "tags": {
+        "[concat('hidden-related:', resourceId(parameters('appServicePlan_AdoAutoStateTransitionsFunctions_resourceGroup'),'Microsoft.Web/serverfarms', parameters('appServicePlan_AdoAutoStateTransitionsFunctions_name')))]": "empty"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverFarms', parameters('appServicePlan_AdoAutoStateTransitionsFunctions_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('adoautostatetransitionsfStorageAccount'))]"
+      ],
+      "kind": "functionapp",
+      "properties": {
+        "name": "[parameters('appService_AdoAutoStateTransitionsFunctions_name')]",
+        "serverFarmId": "[resourceId(parameters('appServicePlan_AdoAutoStateTransitionsFunctions_resourceGroup'),'Microsoft.Web/serverfarms', parameters('appServicePlan_AdoAutoStateTransitionsFunctions_name'))]",
+        "kind": "functionapp",
+        "httpsOnly": true
+      },
+      "resources": [
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/Sites/', parameters('appService_AdoAutoStateTransitionsFunctions_name'))]"
+          ],
+          "properties": {
+            "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageaccount_adoautostatetransitionsf'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccount_adoautostatetransitionsf')), '2015-06-15').key1)]",
+            "WEBSITE_CONTENTSHARE": "[toLower(parameters('appService_AdoAutoStateTransitionsFunctions_name'))]",
+            "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageaccount_adoautostatetransitionsf'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccount_adoautostatetransitionsf')), '2015-06-15').key1)]",
+            "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageaccount_adoautostatetransitionsf'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccount_adoautostatetransitionsf')), '2015-06-15').key1)]",
+            "FUNCTIONS_EXTENSION_VERSION": "~2",
+            "FUNCTIONS_EXTENSION_RUNTIME": "dotnet",
+            "AdoPat": "parameters('appService_AdoPat')",
+            "AdoUrl": "parameters('appService_AdoUrl')",
+            "ServiceBusConnectionString": "parameters('appService_ServiceBusConnectionString')"
+          }
+        }
+      ]
+    },
+    {
+      "location": "[parameters('adoautostatetransitionsfStorageAccount_location')]",
+      "name": "[parameters('adoautostatetransitionsfStorageAccount')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2015-06-15",
+      "tags": {
+        "[concat('hidden-related:', concat('/providers/Microsoft.Web/sites/', parameters('appService_AdoAutoStateTransitionsFunctions_name')))]": "empty"
+      },
+      "properties": {
+        "accountType": "[parameters('adoautostatetransitionsfStorageAccountType')]"
+      }
+    },
+    {
+      "location": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_location')]",
+      "name": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_name')]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2015-08-01",
+      "sku": {
+        "name": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_skuName')]",
+        "tier": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_skuTier')]",
+        "family": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_skuFamily')]",
+        "size": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_skuSize')]"
+      },
+      "properties": {
+        "name": "[parameters('appServicePlan_AdoAutoStateTransitionsFunctions_name')]"
+      }
+    }
+  ]
+}
