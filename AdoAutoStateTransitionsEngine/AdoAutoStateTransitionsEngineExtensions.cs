@@ -1,13 +1,10 @@
 ﻿using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace AdoAutoStateTransitionsEngine
 {
     public enum WorkItemState
     {
+        Unknown,
         New,
         Active,
         Resolved,
@@ -15,11 +12,16 @@ namespace AdoAutoStateTransitionsEngine
         Removed,
     }
 
-    static class AdoAutoStateTransitionsEngineExtensions
+    public static class AdoAutoStateTransitionsEngineExtensions
     {
+        public static string GetState(this WorkItem workItem)
+        {
+            return (workItem.Fields["System.State"] as string);
+        }
+
         public static bool IsStateNew(this WorkItem workItem)
         {
-            return (workItem.Fields["System.State"] as string) == WorkItemState.New.ToString();
+            return GetState(workItem) == WorkItemState.New.ToString();
         }
 
         public static bool IsWorkItemUpdate(this AdoWebHookMessage message)

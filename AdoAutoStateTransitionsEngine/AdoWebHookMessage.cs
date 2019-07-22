@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace AdoAutoStateTransitionsEngine
 {
@@ -55,15 +54,18 @@ namespace AdoAutoStateTransitionsEngine
 
     public class Fields
     {
+        [JsonProperty(PropertyName = "System.Rev")]
         public StringChange SystemRev { get; set; }
-        public DateChange SystemAuthorizedDate { get; set; }
-        public DateChange SystemRevisedDate { get; set; }
+        [JsonProperty(PropertyName = "System.State")]
         public StringChange SystemState { get; set; }
+        [JsonProperty(PropertyName = "System.Reason")]
         public StringChange SystemReason { get; set; }
+        [JsonProperty(PropertyName = "System.AssignedTo")]
         public StringChange SystemAssignedTo { get; set; }
+        [JsonProperty(PropertyName = "System.ChangedDate")]
         public DateChange SystemChangedDate { get; set; }
+        [JsonProperty(PropertyName = "System.Watermark")]
         public StringChange SystemWatermark { get; set; }
-        public StringChange MicrosoftVSTSCommonSeverity { get; set; }
     }
 
     public class DateChange
@@ -77,7 +79,7 @@ namespace AdoAutoStateTransitionsEngine
         public string oldValue { get; set; }
         public string newValue { get; set; }
     }
-    
+
     public class _Links1
     {
         public Href self { get; set; }
