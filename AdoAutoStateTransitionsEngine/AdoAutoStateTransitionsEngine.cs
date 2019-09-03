@@ -24,27 +24,36 @@ namespace AdoAutoStateTransitionsEngine
             this.logger = logger;
         }
 
-        public async Task UpdateActiveState(AdoWebHookMessage message)
+        private async Task UpdateParentState(AdoWebHookMessage message, WorkItemState state, WorkItemState? checkSource = null, bool recursive = false)
         {
-            if (!message.IsChangeToActive())
+            if (!message.IsChangeToState(state))
                 return;
 
             var id = message.WorkItemId();
             while (id > 0)
             {
-                const string reason = "active state rule";
+                string reason = string.Format("{0} state rule", state);
                 logger.LogInformation("Executing {0} for work item {1}", reason, id);
 
                 var parent = await GetParentWorkItem(id);
 
                 logger.LogTrace("Parent work item {0} in state {1}", parent?.Id, parent.GetState());
-                if (parent != null && parent.IsStateNew())
+                if (parent != null && (!checkSource.HasValue || parent.IsInState(checkSource.Value)))
                 {
-                    await UpdateWorkItemState(parent.Id.GetValueOrDefault(), WorkItemState.Active.ToString(), reason);
+                    await UpdateWorkItemState(parent.Id.GetValueOrDefault(), state.ToString(), reason);
                 }
 
-                id = parent == null ? 0 : parent.Id.GetValueOrDefault();
+                id = (recursive && parent != null) ? parent.Id.GetValueOrDefault() : 0;
             }
+        }
+
+        public async Task UpdateActiveState(AdoWebHookMessage message)
+        {
+            await UpdateParentState(message, WorkItemState.Active, WorkItemState.New, true);
+        }
+        public async Task UpdateResolvedState(AdoWebHookMessage message)
+        {
+            await UpdateParentState(message, WorkItemState.Resolved);
         }
 
         public async Task UpdateClosedState(AdoWebHookMessage message)
