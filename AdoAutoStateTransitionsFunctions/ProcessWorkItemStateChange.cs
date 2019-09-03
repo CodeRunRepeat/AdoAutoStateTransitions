@@ -30,7 +30,8 @@ namespace AdoAutoStateTransitionsFunctions
 
             Task.WaitAll(
                 adoEngine.UpdateActiveState(message), 
-                adoEngine.UpdateClosedState(message));
+                adoEngine.UpdateClosedState(message),
+                adoEngine.UpdateResolvedState(message));
         }
 
         private static void LogSensitive(this ILogger log, LogLevel logLevel, string format, params string[] values)
