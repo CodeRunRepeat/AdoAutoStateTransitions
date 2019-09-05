@@ -24,7 +24,12 @@ namespace AdoAutoStateTransitionsEngine
             this.logger = logger;
         }
 
-        private async Task UpdateParentState(AdoWebHookMessage message, WorkItemState state, WorkItemState? checkSource = null, bool recursive = false)
+        private async Task UpdateParentState(
+            AdoWebHookMessage message, 
+            WorkItemState state,
+            bool allChildrenMustBeInState = true,
+            WorkItemState? checkSourceState = null, 
+            bool recursive = false)
         {
             if (!message.IsChangeToState(state))
                 return;
@@ -36,9 +41,17 @@ namespace AdoAutoStateTransitionsEngine
                 logger.LogInformation("Executing {0} for work item {1}", reason, id);
 
                 var parent = await GetParentWorkItem(id);
+                bool updateParent = true;
+                if (parent != null && allChildrenMustBeInState)
+                {
+                    var allChildren = GetChildrenWorkItems(parent).Select(ac => ac.Result);
+                    logger.LogTrace("Parent work item {0} has {1} children", parent?.Id, allChildren.Count());
+
+                    updateParent = allChildren.All(c => c.GetState() == state.ToString());
+                }
 
                 logger.LogTrace("Parent work item {0} in state {1}", parent?.Id, parent.GetState());
-                if (parent != null && (!checkSource.HasValue || parent.IsInState(checkSource.Value)))
+                if (updateParent && parent != null && (!checkSourceState.HasValue || parent.IsInState(checkSourceState.Value)))
                 {
                     await UpdateWorkItemState(parent.Id.GetValueOrDefault(), state.ToString(), reason);
                 }
@@ -49,7 +62,7 @@ namespace AdoAutoStateTransitionsEngine
 
         public async Task UpdateActiveState(AdoWebHookMessage message)
         {
-            await UpdateParentState(message, WorkItemState.Active, WorkItemState.New, true);
+            await UpdateParentState(message, WorkItemState.Active, false, WorkItemState.New, true);
         }
         public async Task UpdateResolvedState(AdoWebHookMessage message)
         {

@@ -162,7 +162,13 @@ namespace AdoAutoStateTransitionsEngineTests
         [TestMethod]
         public void TestUpdateActiveState()
         {
-            AdoWebHookMessage message = GenerateUpdatedMessage(TestTask1, WorkItemState.New, WorkItemState.Active);
+            engine.UpdateWorkItemState(TestUserStory1, WorkItemState.New.ToString()).Wait();
+            engine.UpdateWorkItemState(TestTask1, WorkItemState.New.ToString()).Wait();
+            engine.UpdateWorkItemState(TestTask1, WorkItemState.Active.ToString()).Wait();
+            engine.UpdateWorkItemState(TestTask2, WorkItemState.New.ToString()).Wait();
+            engine.UpdateWorkItemState(TestTask3, WorkItemState.New.ToString()).Wait();
+
+            var message = GenerateUpdatedMessage(TestTask1, WorkItemState.New, WorkItemState.Active);
             engine.UpdateActiveState(message).Wait();
 
             var id = message.resource.workItemId;
@@ -193,6 +199,21 @@ namespace AdoAutoStateTransitionsEngineTests
 
             var parent = engine.GetWorkItem(TestUserStory2).Result;
             Assert.AreEqual(WorkItemState.Resolved.ToString(), parent.GetState());
+        }
+
+        [TestMethod]
+        public void TestUpdateResolvedState2()
+        {
+            engine.UpdateWorkItemState(TestUserStory2, WorkItemState.New.ToString()).Wait();
+            engine.UpdateWorkItemState(TestBug1, WorkItemState.New.ToString()).Wait();
+            engine.UpdateWorkItemState(TestBug1, WorkItemState.Resolved.ToString()).Wait();
+            engine.UpdateWorkItemState(TestBug2, WorkItemState.New.ToString()).Wait();
+
+            var message = GenerateUpdatedMessage(TestBug1, WorkItemState.Unknown, WorkItemState.Resolved);
+            engine.UpdateResolvedState(message).Wait();
+
+            var parent = engine.GetWorkItem(TestUserStory2).Result;
+            Assert.AreEqual(WorkItemState.New.ToString(), parent.GetState());
         }
 
         private static AdoWebHookMessage GenerateUpdatedMessage(int workItemId, WorkItemState oldState, WorkItemState active)
