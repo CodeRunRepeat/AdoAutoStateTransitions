@@ -6,13 +6,13 @@
       "value": "AdoAutoStateTransitionsFunctions"
     },
     "appServicePlan_AdoAutoStateTransitionsFunctions_location": {
-      "value": "West Europe"
+      "value": "UK West"
     },
     "appServicePlan_AdoAutoStateTransitionsFunctions_name": {
       "value": "AdoAutoStateTransitionsFunctions"
     },
     "appServicePlan_AdoAutoStateTransitionsFunctions_resourceGroup": {
-      "value": "anastmTests"
+      "value": "ado-state-transitions"
     },
     "adoautostatetransitionsfStorageAccount": {
       "value": "adoautostatetransitionsf"
@@ -21,7 +21,7 @@
       "value": "adoautostatetransitionsf"
     },
     "adoautostatetransitionsfStorageAccount_location": {
-      "value": "West Europe"
+      "value": "UK West"
     },
     "adoautostatetransitionsfStorageAccountType": {
       "value": "Standard_LRS"
@@ -42,7 +42,7 @@
       "value": 0
     },
     "appService_AdoUrl": {
-      "value": "https://dev.azure.com/csee2e"
+      "value": "https://dev.azure.com/contoso"
     }
   }
 }

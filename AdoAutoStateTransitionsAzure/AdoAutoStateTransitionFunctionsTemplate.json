@@ -84,7 +84,7 @@
             "WEBSITE_CONTENTSHARE": "[toLower(parameters('appService_AdoAutoStateTransitionsFunctions_name'))]",
             "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageaccount_adoautostatetransitionsf'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccount_adoautostatetransitionsf')), '2015-06-15').key1)]",
             "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageaccount_adoautostatetransitionsf'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccount_adoautostatetransitionsf')), '2015-06-15').key1)]",
-            "FUNCTIONS_EXTENSION_VERSION": "~2",
+            "FUNCTIONS_EXTENSION_VERSION": "~3",
             "FUNCTIONS_EXTENSION_RUNTIME": "dotnet",
             "AdoPat": "parameters('appService_AdoPat')",
             "AdoUrl": "parameters('appService_AdoUrl')",

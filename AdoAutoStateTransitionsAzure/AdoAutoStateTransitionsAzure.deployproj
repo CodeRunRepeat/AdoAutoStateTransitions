@@ -25,8 +25,8 @@
   <ItemGroup>
     <Content Include="azuredeploy.parameters.json" />
     <Content Include="azuredeploy.json" />
-    <None Include="AdoAutoStateTransitionFunctionsTemplate.parameters.json" />
-    <None Include="AdoAutoStateTransitionFunctionsTemplate.json" />
+    <Content Include="AdoAutoStateTransitionFunctionsTemplate.parameters.json" />
+    <Content Include="AdoAutoStateTransitionFunctionsTemplate.json" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>

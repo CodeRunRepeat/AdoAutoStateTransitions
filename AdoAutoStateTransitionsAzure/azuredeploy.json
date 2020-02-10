@@ -98,7 +98,7 @@
           "name": "SendAccessKey",
           "location": "[parameters('location')]",
           "dependsOn": [
-            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusTopicName'))]"
+            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusNamespaceName'))]"
           ],
           "properties": {
             "rights": [
@@ -112,7 +112,7 @@
           "name": "ListenAccessKey",
           "location": "[parameters('location')]",
           "dependsOn": [
-            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusTopicName'))]"
+            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusNamespaceName'))]"
           ],
           "properties": {
             "rights": [
